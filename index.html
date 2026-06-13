@@ -1014,15 +1014,15 @@ function buildCompat(a){
   return wrap;
 }
 
+const SITE_URL = 'https://soutai-neko.github.io/keiki-doubutsu-shindan/';
 function shareResult(a, name){
   const who = name ? name + 'さんは' : '私は';
   const text = '【けいきちゃんねる動物診断】\n' + who + '「' + a.name + '」でした！\n' +
-               '一言でいうと…' + a.catch + '\nみんなもやってみてね👇\n#けいきちゃんねる動物診断';
-  // 動物ごとのシェアページURL（OGカードでその動物の画像が表示される）
-  const dir = location.href.split(/[?#]/)[0].replace(/[^/]*$/, '');   // 公開先ディレクトリ
-  const url = dir + 'share/' + a.id + '.html';
+               '一言でいうと…' + a.catch + '\n\n▼みんなもやってみてね\n' + SITE_URL + '\n#けいきちゃんねる動物診断';
+  // 動物ごとのOGページをカードに（結果の動物画像が表示され、タップで診断トップへ転送）
+  const cardUrl = SITE_URL + 'share/' + a.id + '.html';
   const intent = 'https://twitter.com/intent/tweet?text=' +
-    encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+    encodeURIComponent(text) + '&url=' + encodeURIComponent(cardUrl);
   window.open(intent, '_blank', 'noopener');
 }
 
