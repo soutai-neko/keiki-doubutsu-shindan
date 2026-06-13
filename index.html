@@ -1015,14 +1015,21 @@ function buildCompat(a){
 }
 
 const SITE_URL = 'https://soutai-neko.github.io/keiki-doubutsu-shindan/';
+const ANIMAL_EMOJI = {
+  dog:'🐶', cat:'🐱', rabbit:'🐰', fox:'🦊', dolphin:'🐬', owl:'🦉',
+  penguin:'🐧', lion:'🦁', elephant:'🐘', panda:'🐼', peacock:'🦚', turtle:'🐢'
+};
 function shareResult(a, name){
-  const who = name ? name + 'さんは' : '私は';
-  const text = '【けいきちゃんねる動物診断】\n' + who + '「' + a.name + '」でした！\n' +
-               '一言でいうと…' + a.catch + '\n\n▼みんなもやってみてね\n' + SITE_URL + '\n#けいきちゃんねる動物診断';
-  // 動物ごとのOGページをカードに（結果の動物画像が表示され、タップで診断トップへ転送）
-  const cardUrl = SITE_URL + 'share/' + a.id + '.html';
+  const e = ANIMAL_EMOJI[a.id] || '🐾';
+  const who = name ? name + 'さんは' : 'わたしは';
+  const text =
+    '🐾✨けいきちゃんねる動物診断✨🐾\n' +
+    e + ' ' + who + '「' + a.name + '」でした！ ' + e + '\n' +
+    '💬 ' + a.catch + '\n\n' +
+    '🎉 キミはどの動物かな？やってみてね👇\n' +
+    '#けいきちゃんねる動物診断';
   const intent = 'https://twitter.com/intent/tweet?text=' +
-    encodeURIComponent(text) + '&url=' + encodeURIComponent(cardUrl);
+    encodeURIComponent(text) + '&url=' + encodeURIComponent(SITE_URL);
   window.open(intent, '_blank', 'noopener');
 }
 
